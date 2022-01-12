@@ -25,7 +25,6 @@ for (let index = 0; index < partitions.length; index++) {
 Sortable.create(process,{
   animation: 150,
   group: 'nested',
-  
 });
 
 Sortable.create(finished,{
