@@ -1,14 +1,10 @@
-const { red } = require('color-name');
 const express = require('express');
 const {engine} = require('express-handlebars');
 const multer = require('multer');
-const path = require('path')
-const fs = require('fs-extra')
-var app = express();
+const path = require('path');
+const fs = require('fs-extra');
 
-app.use(express.urlencoded({extended:true}));
-app.use(express.json());
-app.use(multer({ dest: path.join(__dirname, '/public') }).single('procFile'));
+var app = express();
 
 const partitions = [
   {
@@ -38,15 +34,15 @@ const partitions = [
   }
 
 ]
-
+//Server Config
 app.set('port',process.env.PORT || 3000);
 app.engine('hbs',engine({
   extname:'.hbs',
   helpers:{
     generateColor() {
-      var r = Math.floor(Math.random() * 256);
-      var g = Math.floor(Math.random() * 256);
-      var b = Math.floor(Math.random() * 256);
+      var r = Math.floor(Math.random() * 200);
+      var g = Math.floor(Math.random() * 200);
+      var b = Math.floor(Math.random() * 200);
       var rgbColor = `rgb(${r},${g},${b})`
       return rgbColor
     }
@@ -54,19 +50,28 @@ app.engine('hbs',engine({
 }));
 app.set('view engine','hbs')
 
+//Middleware
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+app.use(multer({ dest: path.join(__dirname, '/public') }).single('procFile'));
+app.use('/public',express.static('public'));
+
+
+//Routes
 app.get('/',(req, res) => {
   res.render('index')
 })
 
-app.post('/procedures',async (req, res) => {
+
+app.post('/procedures', async (req, res) => {
   const procedures = await fs.readJSONSync(path.join(__dirname,`/public/${req.file.filename}`));
-  await fs.unlinkSync(path.join(__dirname,`/public/${req.file.filename}`));
+  fs.unlinkSync(path.join(__dirname,`/public/${req.file.filename}`));
   res.render('procedures',{procedures,partitions})
 })
 
-app.use('/public',express.static('public'));
 
 
+//Server listen petitions
 app.listen(app.get('port'),() => {
   console.log('Listen on Port ' + app.get('port'))
 });
