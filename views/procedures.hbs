@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <div class="card bg-info">
+      <h1 class="text-center">Asignacion de Memoria</h1>
+    </div>
+    <div class="card-body">
+      <h2>Arrastra los procesos a sus particiones</h2>
+    </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <div class="icons">
+        <i class="uil uil-clock-three "id="icons-cont" ></i>Tiempo: <span id="contador">0</span> seg
+      </div>
+      <div class="card-header bg-dark text-white mb-2">
+        Procesos Terminados
+      </div>
+      <div id="finish">
+        
+      </div>
+    </div>
+    <div class="col-4 mt-4">
+      <div class="card-header bg-dark text-white mb-2">
+        <h2>Particiones</h2>
+      </div>
+        <div  id="parts">
+          {{#each partitions}}
+            <div class="card mb-2 parts p-2" style="height: {{size}}px;">
+              <span>Particion: {{partition}} Tamaño: {{sizePart}}</span>
+            </div>
+          {{/each}}
+        </div>
+    </div>
+
+    <div class="col-4 mt-4">
+      <div class="card-header bg-dark text-white mb-2">
+        Lista de Procesos entrantes
+      </div>
+      <div class="process" id="process">
+          {{#each procedures}}
+            <div class="card mb-2 text-white" style="background-color:{{generateColor}};height:{{size}}px;">
+              <span>Proceso {{id}} Tamaño: {{size}} kB Tiempo: {{duration}} s</span>
+            </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>

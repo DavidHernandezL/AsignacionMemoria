@@ -1,11 +1,11 @@
 
-
 const process = document.getElementById('process')
 const partitions = document.querySelectorAll('.parts');
 const finished = document.getElementById('finish');
 const cont = document.getElementById('contador');
 const icon = document.getElementById('icons-cont');
 let time = 0
+
 icon.addEventListener('click',()=>{
   time++
   cont.innerHTML = time;

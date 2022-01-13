@@ -1,52 +1,23 @@
 <div class="container">
-  <div class="row">
-    <div class="card">
-      <div class="card bg-info">
-      <h1 class="text-center">Asignacion de Memoria</h1>
-    </div>
-    <div class="card-body">
-      <h2>Arrastra los procesos a sus particiones</h2>
-    </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-4">
-      <div class="icons">
-        <i class="uil uil-clock-three "id="icons-cont" ></i><span id="contador"> 0</span>
-      </div>
-      <div class="card-header bg-dark text-white mb-2">
-        Procesos Terminados
-      </div>
-      <div id="finish">
-        <div class="card mb-2 parts">
-              
-        </div>
-      </div>
-    </div>
-    <div class="col-4 mt-4">
-      <div class="card-header bg-dark text-white mb-2">
-        <h2>Particiones</h2>
-      </div>
-        <div  id="parts">
-          {{#each partitions}}
-            <div class="card mb-2 parts p-2" style="height: {{size}}px;">
-              <span>Particion: {{partition}} Tamaño: {{sizePart}}</span>
-            </div>
-          {{/each}}
-        </div>
+  <div class="card m-4 ">
+
+    <div class="bg-info card-header card-title">
+      <h1>Asignación de Memoria</h1>
     </div>
 
-    <div class="col-4 mt-4">
-      <div class="card-header bg-dark text-white mb-2">
-        Lista de Procesos entrantes
-      </div>
-      <div class="process" id="process">
-          {{#each procs}}
-            <div class="card mb-2 text-white" style="background-color:{{generateColor}};height: {{size}}px;">
-              <span>Proceso {{id}} Tamaño: {{size}} kB Tiempo: {{duration}} s  </span>
-            </div>
-        {{/each}}
-      </div>
+    <div class="card-body card-text">
+      <p>Instrucciones: Sube un archivo JSON con el siguiente formato: </p>
+      <img class="format-json " src="/public/code.png" alt="Formato de COdigo">
     </div>
   </div>
+
+  <form action="/procedures" method="post" enctype="multipart/form-data">
+
+    <div class="input-group m-4">
+      <input type="file" class="form-control" name="procFile" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+      <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Cargar</button>
+    </div>
+
+  </form>
+
 </div>
